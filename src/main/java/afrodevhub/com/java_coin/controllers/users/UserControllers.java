@@ -1,6 +1,7 @@
 package afrodevhub.com.java_coin.controllers.users;
 
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,8 @@ public class UserControllers {
 
     @GetMapping
     public String getUser() throws Exception {
-        final String user = userSerialiser.create("dfunani@live.co.za", "password@123");
+        Integer number = new Random().nextInt(1000);
+        final String user = userSerialiser.create("dfunani" + number.toString() + "1@live.co.za", "password@123");
         return user;
     }
 
@@ -30,5 +32,11 @@ public class UserControllers {
     public ResponseEntity<String> handleCustomException(UserExceptions ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleCustomException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Internal Server Error.");
     }
 }

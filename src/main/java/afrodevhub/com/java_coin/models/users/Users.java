@@ -22,19 +22,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "users", uniqueConstraints = {"email"})
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email"})
+})
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @UniqueConstraint
     private UUID user_id;
-    @Column(unique = true, nullable = false)
     private String email;
     private String password;
     private String status;
