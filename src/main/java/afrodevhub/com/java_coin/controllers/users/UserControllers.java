@@ -2,6 +2,7 @@ package afrodevhub.com.java_coin.controllers.users;
 
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class UserControllers {
     @GetMapping
     public String getUser() throws Exception {
         Integer number = new Random().nextInt(1000);
-        final String user = userSerialiser.create("dfunani" + number.toString() + "1@live.co.za", "password@123");
+        String user = userSerialiser.create("dfunani" + number.toString() + "@live.co.za", "password@123");
         return user;
     }
 
